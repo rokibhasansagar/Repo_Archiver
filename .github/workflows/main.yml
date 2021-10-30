@@ -23,4 +23,6 @@ jobs:
 
       # Run the Deno script to save webpages of a GitHub repository to Internet Archive
       - name: Save Repository
-        run: deno run -A https://tools.maximousblk.now.sh/archiverepo.ts ${reposlug}
+        run: |
+          deno install -A https://tools.maximousblk.now.sh/archiverepo.ts
+          archiverepo ${reposlug} -v
