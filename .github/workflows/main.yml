@@ -1,0 +1,26 @@
+name: Repo Archiver
+
+on:
+  workflow_dispatch:
+    inputs:
+      reposlug:
+        description: "Repository slug, as in Username/Reponame"
+        required: true
+
+env:
+  reposlug: ${{ github.event.inputs.reposlug }}
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Set up your GitHub Actions workflow with a specific version of Deno.
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      # Run the Deno script to save webpages of a GitHub repository to Internet Archive
+      - name: Save Repository
+        run: deno run -A https://tools.maximousblk.now.sh/archiverepo.ts ${reposlug}
